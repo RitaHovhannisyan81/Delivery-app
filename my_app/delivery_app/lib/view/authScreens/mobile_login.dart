@@ -68,7 +68,7 @@ class _MobileLoginUserState extends State<MobileLoginUser> {
                       borderSide:const BorderSide(color: Color.fromARGB(255, 201, 199, 199)),
                       ),
                       focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(3),
-                      borderSide: const BorderSide(color: Color.fromARGB(255, 225, 33, 33)),
+                      borderSide: const BorderSide(color: Color.fromARGB(255, 11, 11, 11)),
                       ),
                       disabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(3),
                       borderSide: const BorderSide(color: Color.fromARGB(255, 201, 199, 199),
