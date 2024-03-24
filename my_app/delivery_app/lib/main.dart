@@ -1,6 +1,6 @@
-import 'package:delivery_app/view/authScreens/otpScreen.dart';
+import 'package:delivery_app/view/authScreens/otp_Screen.dart';
 import 'package:flutter/material.dart';
-import 'package:delivery_app/view/authScreens/mobile_login.dart';
+//import 'package:delivery_app/view/authScreens/mobile_login.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
