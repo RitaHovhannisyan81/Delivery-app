@@ -48,7 +48,8 @@ class _MobileLoginUserState extends State<MobileLoginUser> {
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(3),
-                          color: const Color.fromARGB(255, 201, 199, 199)),
+                          border: Border.all(color: Colors.grey)),
+                          //color: const Color.fromARGB(255, 201, 199, 199)),
                           child:Text(selectedCountry,style:const TextStyle(fontSize: 14))
                           ),
                 ),
@@ -62,8 +63,8 @@ class _MobileLoginUserState extends State<MobileLoginUser> {
                       contentPadding:
                       const EdgeInsets.symmetric(vertical: 0, horizontal: 14),
                       hintText: 'Mobile number',
-                      filled: true,
-                      fillColor: Colors.grey[300],
+                     // filled: true,
+                      //fillColor: Colors.grey[300],
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(3),
                       borderSide:const BorderSide(color: Color.fromARGB(255, 201, 199, 199)),
                       ),

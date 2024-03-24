@@ -1,3 +1,4 @@
+import 'package:delivery_app/view/authScreens/otpScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:delivery_app/view/authScreens/mobile_login.dart';
 import 'package:sizer/sizer.dart';
@@ -13,7 +14,9 @@ class MyApp extends StatelessWidget {
     return Sizer(builder: (context, ___, __) {
       return MaterialApp(
         debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo', theme: ThemeData(), home: MobileLoginUser());
+          title: 'Flutter Demo',
+          theme: ThemeData(),
+          home: OTPScreen());
     });
   }
 }
