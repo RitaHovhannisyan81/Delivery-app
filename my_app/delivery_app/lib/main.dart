@@ -1,6 +1,5 @@
-import 'package:delivery_app/view/authScreens/otp_Screen.dart';
+import 'package:delivery_app/view/bottomNavigationBar/bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-//import 'package:delivery_app/view/authScreens/mobile_login.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
@@ -16,7 +15,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(),
-          home: OTPScreen());
+          home: BottomNavigationBarUberEats());
     });
   }
 }

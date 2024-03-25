@@ -1,12 +1,7 @@
 import 'dart:async';
-
 import 'package:delivery_app/utils/colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'package:flutter/src/widgets/framework.dart';
-// import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OTPScreen extends StatefulWidget {
@@ -51,8 +46,8 @@ class _OTPScreenState extends State<OTPScreen> {
             child: ElevatedButton(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
-                shape: CircleBorder(),
-                padding: EdgeInsets.all(5),
+                shape:const CircleBorder(),
+                padding:const EdgeInsets.all(5),
                 backgroundColor: grey50,
                 elevation: 2),
               child: const FaIcon(
