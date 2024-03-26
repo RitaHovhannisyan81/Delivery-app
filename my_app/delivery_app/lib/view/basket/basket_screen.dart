@@ -14,7 +14,7 @@ class _BusketScreenState extends State<BusketScreen> {
     return const Scaffold(
       body: Center(
         child:
-        Text('Account Screen',
+        Text('Basket Screen',
     style: TextStyle(fontSize: 16,
     fontWeight: FontWeight.bold),
     ),

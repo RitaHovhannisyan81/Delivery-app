@@ -10,7 +10,7 @@ class GroceryScreen extends StatefulWidget {
 class _GroceryScreenState extends State<GroceryScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: Text('Account Screen',
+    return const Scaffold(body: Center(child: Text('Grocery Screen',
     style: TextStyle(fontSize: 16,
     fontWeight: FontWeight.bold),
     ),
