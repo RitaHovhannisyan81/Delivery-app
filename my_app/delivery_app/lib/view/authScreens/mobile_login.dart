@@ -1,7 +1,11 @@
 import 'package:country_picker/country_picker.dart';
+import 'package:delivery_app/controller/provider/authProvider/mobile_auth_provider.dart';
+import 'package:delivery_app/controller/services/authServices/mobile_auth_services.dart';
 import 'package:delivery_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+
 class MobileLoginUser extends StatefulWidget {
   const MobileLoginUser({super.key});
 
@@ -12,19 +16,29 @@ class MobileLoginUser extends StatefulWidget {
 class _MobileLoginUserState extends State<MobileLoginUser> {
   String selectedCountry = '+374';
   TextEditingController mobileController = TextEditingController();
+  bool receiveOTPButtonPressed = false;
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        receiveOTPButtonPressed = false;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
             body: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 14),
           children: [
             const SizedBox(height: 50),
             const Text('Enter your mobile number',
-                style: TextStyle(fontWeight: FontWeight.bold,
-                fontSize: 18)),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,48 +63,65 @@ class _MobileLoginUserState extends State<MobileLoginUser> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(3),
                           border: Border.all(color: Colors.grey)),
-                          //color: const Color.fromARGB(255, 201, 199, 199)),
-                          child:Text(selectedCountry,style:const TextStyle(fontSize: 14))
-                          ),
+                      //color: const Color.fromARGB(255, 201, 199, 199)),
+                      child: Text(selectedCountry,
+                          style: const TextStyle(fontSize: 14))),
                 ),
                 SizedBox(
                   width: 220,
                   child: TextField(
-                    controller:mobileController,
+                    controller: mobileController,
                     cursorColor: black,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      contentPadding:
-                      const EdgeInsets.symmetric(vertical: 0, horizontal: 14),
-                      hintText: 'Mobile number',
-                     // filled: true,
-                      //fillColor: Colors.grey[300],
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(3),
-                      borderSide:const BorderSide(color: Color.fromARGB(255, 201, 199, 199)),
-                      ),
-                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(3),
-                      borderSide: const BorderSide(color: Color.fromARGB(255, 11, 11, 11)),
-                      ),
-                      disabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(3),
-                      borderSide: const BorderSide(color: Color.fromARGB(255, 201, 199, 199),
-                      ),)
-
-                    ),
-                    ),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 0, horizontal: 14),
+                        hintText: 'Mobile number',
+                        // filled: true,
+                        //fillColor: Colors.grey[300],
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(3),
+                          borderSide: const BorderSide(
+                              color: Color.fromARGB(255, 201, 199, 199)),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(3),
+                          borderSide: const BorderSide(
+                              color: Color.fromARGB(255, 11, 11, 11)),
+                        ),
+                        disabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(3),
+                          borderSide: const BorderSide(
+                            color: Color.fromARGB(255, 201, 199, 199),
+                          ),
+                        )),
                   ),
+                ),
               ],
             ),
             Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 3,vertical: 14),
+              padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 14),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    receiveOTPButtonPressed = true;
+                  });
+                  context.read<MobileAuthProvider>().updateMobileNumber(
+                      '$selectedCountry${mobileController.text.trim()}');
+
+                  MobileAuthServices.receiveOTP(
+                      context: context,
+                      mobileNo:
+                          '$selectedCountry${mobileController.text.trim()}');
+                },
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(2.0),
-  ),
-                    backgroundColor: black, minimumSize: const Size(90, 50)
+                      borderRadius: BorderRadius.circular(2.0),
                     ),
-                child: const Stack(
+                    backgroundColor: black,
+                    minimumSize: const Size(90, 50)),
+                child: receiveOTPButtonPressed? const CircularProgressIndicator(color: Colors.white,):
+                const Stack(
                   children: [
                     Align(
                       alignment: Alignment.center,
@@ -120,9 +151,9 @@ class _MobileLoginUserState extends State<MobileLoginUser> {
                 color: Colors.grey,
               ),
             ),
-              const SizedBox(
+            const SizedBox(
               height: 4,
-              ),
+            ),
             const Row(
               children: [
                 Expanded(
@@ -130,47 +161,46 @@ class _MobileLoginUserState extends State<MobileLoginUser> {
                 ),
                 Center(
                   child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 3,vertical: 14),
+                    padding: EdgeInsets.symmetric(horizontal: 3, vertical: 14),
                     child: Text('or',
                         style: TextStyle(
-                         // decoration: TextDecoration.lineThrough,
+                          // decoration: TextDecoration.lineThrough,
                           fontWeight: FontWeight.normal,
                           color: Colors.grey,
-                        )
-                        ),
-                        ),
+                        )),
+                  ),
                 )
-                      ],
+              ],
             ),
-            ElevatedButton(onPressed: () {},
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.white,
-            shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(2.0),),
-            minimumSize: const Size(150,50),
-            elevation: 2),
-            child:const Stack(children: [
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(2.0),
+                  ),
+                  minimumSize: const Size(150, 50),
+                  elevation: 2),
+              child: const Stack(
+                children: [
                   Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Continue with google',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Colors.black),
-                      ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Continue with google',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.black),
                     ),
-                      Positioned(
-                        left: 8,
-                        child: FaIcon(
-                          FontAwesomeIcons.google,
-                            color: Colors.black,
-                            size: 18))
-            ],),)
-            ]
-            ),
-
-    )
-    )
-    );
+                  ),
+                  Positioned(
+                      left: 8,
+                      child: FaIcon(FontAwesomeIcons.google,
+                          color: Colors.black, size: 18))
+                ],
+              ),
+            )
+          ]),
+    )));
   }
 }

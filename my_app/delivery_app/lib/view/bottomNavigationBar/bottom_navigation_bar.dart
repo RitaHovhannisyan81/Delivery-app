@@ -1,5 +1,5 @@
 import 'package:delivery_app/utils/colors.dart';
-import 'package:delivery_app/view/account/account.dart';
+import 'package:delivery_app/model/account/account.dart';
 import 'package:delivery_app/view/basket/basket_screen.dart';
 import 'package:delivery_app/view/browse/browse.dart';
 import 'package:delivery_app/view/grocery/grocery_Screen.dart';
